@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 // logo
                 Image.asset(
-                  'lib/images/unlock.png',
+                  'assets/images/unlock.png',
                   height: 100,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -229,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
                     SquareTile(
                       onTap: googleSignIn,
                       child: Image.asset(
-                        'lib/images/google.png',
+                        'assets/images/google.png',
                         height: 25,
                       ),
                     ),
@@ -240,7 +240,7 @@ class _LoginPageState extends State<LoginPage> {
                     SquareTile(
                       onTap: appleSignIn,
                       child: Image.asset(
-                        'lib/images/apple.png',
+                        'assets/images/apple.png',
                         height: 25,
                         color: Provider.of<ThemeProvider>(context).isDarkMode
                             ? Colors.grey.shade400

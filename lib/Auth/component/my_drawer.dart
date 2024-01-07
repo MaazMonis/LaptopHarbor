@@ -22,7 +22,7 @@ class MyDrawer extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 25.0),
                       child: Image.asset(
-                        'lib/images/unlock.png',
+                        'assets/images/unlock.png',
                         color: Theme.of(context).colorScheme.primary,
                         height: 60,
                       ),
