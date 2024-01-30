@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import './component/my_button.dart';
 import './component/my_textfield.dart';
@@ -9,103 +10,47 @@ import 'home_page.dart';
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
 
-  const LoginPage({super.key, required this.onTap});
+  const LoginPage({Key? key, required this.onTap}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // text editing controllers
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String _errorMessage = '';
 
-  // login method
-  void login() {
-    // authenticate user first
-
-    // once authenticated, send user to homepage
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ),
-    );
+  Future<void> login() async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      // Navigate to home page if login successful
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+    } catch (e) {
+      print('Login failed: $e');
+      // Show error message to the user
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Login failed: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
-  // forgot password
   void forgotPw() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Theme.of(context).colorScheme.background,
-        title: const Text("User tapped forgot password."),
-      ),
-    );
-  }
-
-  // google sign in
-  void googleSignIn() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        title: const Text("Login with Google?"),
-        actions: [
-          // cancel
-          MaterialButton(
-            color: Theme.of(context).colorScheme.secondary,
-            elevation: 0,
-            child: const Text("Cancel"),
-            onPressed: () => Navigator.pop(context),
-          ),
-
-          // yes
-          MaterialButton(
-            color: Theme.of(context).colorScheme.secondary,
-            elevation: 0,
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              ),
-            ),
-            child: const Text("Yes"),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // apple sign in
-  void appleSignIn() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        title: const Text("Login with Apple?"),
-        actions: [
-          // cancel
-          MaterialButton(
-            color: Theme.of(context).colorScheme.secondary,
-            elevation: 0,
-            child: const Text("Cancel"),
-            onPressed: () => Navigator.pop(context),
-          ),
-
-          // yes
-          MaterialButton(
-            color: Theme.of(context).colorScheme.secondary,
-            elevation: 0,
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              ),
-            ),
-            child: const Text("Yes"),
-          ),
-        ],
+        title: const Text("Not In Requirement"),
       ),
     );
   }
@@ -121,46 +66,32 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 50),
-
-                // logo
                 Image.asset(
                   'assets/images/unlock.png',
                   height: 100,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-
                 const SizedBox(height: 50),
-
-                // welcome back, you've been missed!
                 Text(
-                  'Welcome back you\'ve been missed!',
+                  'Welcome To My App',
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                     fontSize: 16,
                   ),
                 ),
-
                 const SizedBox(height: 25),
-
-                // email textfield
                 MyTextField(
                   controller: emailController,
                   hintText: 'Email',
                   obscureText: false,
                 ),
-
                 const SizedBox(height: 10),
-
-                // password textfield
                 MyTextField(
                   controller: passwordController,
                   hintText: 'Password',
                   obscureText: true,
                 ),
-
                 const SizedBox(height: 10),
-
-                // forgot password?
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -179,18 +110,12 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 25),
-
-                // sign in button
                 MyButton(
                   onTap: login,
                   text: "Login",
                 ),
-
                 const SizedBox(height: 25),
-
-                // or continue with
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -201,14 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text(
-                          'Or continue with',
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary),
-                        ),
-                      ),
+
                       Expanded(
                         child: Divider(
                           thickness: 0.5,
@@ -218,41 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 25),
-
-                // google + apple sign in buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // google button
-                    SquareTile(
-                      onTap: googleSignIn,
-                      child: Image.asset(
-                        'assets/images/google.png',
-                        height: 25,
-                      ),
-                    ),
-
-                    const SizedBox(width: 25),
-
-                    // apple button
-                    SquareTile(
-                      onTap: appleSignIn,
-                      child: Image.asset(
-                        'assets/images/apple.png',
-                        height: 25,
-                        color: Provider.of<ThemeProvider>(context).isDarkMode
-                            ? Colors.grey.shade400
-                            : Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 25),
-
-                // not a member? register now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -274,6 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 )
+
               ],
             ),
           ),

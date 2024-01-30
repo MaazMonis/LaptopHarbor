@@ -1,13 +1,32 @@
 {
   "project_info": {
-    "project_number": "1051660570362",
-    "project_id": "laptop-harbor-ad0b0",
-    "storage_bucket": "laptop-harbor-ad0b0.appspot.com"
+    "project_number": "265609947320",
+    "project_id": "e-project-fa000",
+    "storage_bucket": "e-project-fa000.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1051660570362:android:e6fca7011dd478a2144343",
+        "mobilesdk_app_id": "1:265609947320:android:ae517e41405ce21da9ac4d",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdonfmvzeKabxW2FvaubMf_1aP304LxlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265609947320:android:f6936d860368cfa6a9ac4d",
         "android_client_info": {
           "package_name": "com.example.laptopharbor"
         }
@@ -15,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB7kefJ94TKPPCxFuGgalb7xtKpu6Aj5PU"
+          "current_key": "AIzaSyDdonfmvzeKabxW2FvaubMf_1aP304LxlQ"
         }
       ],
       "services": {

@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import './component/my_button.dart';
 import './component/my_textfield.dart';
 import 'home_page.dart';
@@ -14,23 +17,49 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   // text editing controllers
-  final emailController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseReference _userRef =  FirebaseDatabase.instance.reference().child('users');
+  String _errorMessage = '';// Firebase Auth instance
 
-  final passwordController = TextEditingController();
+  Future<void> register() async {
+    try {
+      if (passwordController.text != confirmPasswordController.text) {
+        setState(() {
+          _errorMessage = 'Passwords do not match';
+        });
+        return;
+      }
+      final UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      if (userCredential.user != null) {
+        // Save user information to Firebase Database
+        await _userRef.child(userCredential.user!.uid).set({
+          'email': emailController.text,
+        });
+        // Navigate to home page if registration successful
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      }
+    }
+      catch (e) {
 
-  final confirmPasswordController = TextEditingController();
-
-  // register method
-  void register() {
-    // create user account first
-
-    // once created, send user to homepage
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ),
-    );
+      print('Registration failed: $e');
+      // Show error to user
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Registration failed: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   @override
@@ -47,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 // logo
                 Image.asset(
-                  'lib/images/unlock.png',
+                  'assets/images/unlock.png',
                   height: 100,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -91,6 +120,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
 
                 const SizedBox(height: 25),
+                if (_errorMessage.isNotEmpty)
+                Text(
+                _errorMessage,
+                style: TextStyle(color: Colors.red),
+                ),
+
 
                 // sign in button
                 MyButton(
@@ -129,3 +164,4 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
+
