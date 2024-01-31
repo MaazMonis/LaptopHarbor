@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:laptopharbor/src/view/screen/home_screen.dart';
+import 'dart:ui' show PointerDeviceKind;
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -24,8 +26,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        dragDevices: {
+          PointerDeviceKind.mouse,
+          PointerDeviceKind.touch,
+        },
+      ),
       debugShowCheckedModeBanner: false,
-      home: const LoginOrRegister(),
+      home: const HomeScreen(),
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }
