@@ -1,6 +1,6 @@
 import 'package:laptopharbor/src/model/product_size_type.dart';
 
-enum ProductType { all, watch, mobile, headphone, tablet, tv, Laptop }
+enum ProductType { all,Laptop }
 
 class Product {
   String name;

@@ -96,17 +96,7 @@ class ProductListScreen extends StatelessWidget {
             "Top Categories",
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          TextButton(
-            onPressed: () {},
-            style: TextButton.styleFrom(foregroundColor: AppColor.darkOrange),
-            child: Text(
-              "SEE ALL",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(color: Colors.deepOrange.withOpacity(0.7)),
-            ),
-          )
+
         ],
       ),
     );

@@ -45,6 +45,11 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   font_awesome_flutter: ^10.6.0
   animations: ^2.0.8
+  firebase_storage: ^11.6.1
+  cloud_firestore: ^4.15.0
+  image_picker: ^1.0.7
+  flutter_launcher_icons: ^0.13.1
+  foundation: ^0.0.5
 
 
 

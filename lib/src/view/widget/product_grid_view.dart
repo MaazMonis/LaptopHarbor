@@ -68,7 +68,7 @@ class ProductGridView extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         padding: const EdgeInsets.all(10),
-        height: 200,
+        height: 90,
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -92,15 +92,7 @@ class ProductGridView extends StatelessWidget {
               ),
             ),
 
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: product.isAvailable
-                    ? () => controller.addToCart(product)
-                    : null,
-                child: const Text("Add to cart"),
-              ),
-            ),
+
             const SizedBox(height: 5),
             Row(
               children: [
@@ -120,9 +112,13 @@ class ProductGridView extends StatelessWidget {
                       color: Colors.grey,
                       fontWeight: FontWeight.w500,
                     ),
+
                   ),
+
                 )
+
               ],
+
             )
           ],
         ),

@@ -17,6 +17,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   // text editing controllers
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController contactController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
@@ -40,7 +42,10 @@ class _RegisterPageState extends State<RegisterPage> {
       if (userCredential.user != null) {
         // Save user information to Firebase Database
         await _userRef.child(userCredential.user!.uid).set({
+          'name': nameController.text,
           'email': emailController.text,
+          'contact': contactController.text,
+
         });
         // Navigate to home page if registration successful
         Navigator.pushReplacement(
@@ -72,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
+                const SizedBox(height: 20),
 
                 // logo
                 Image.asset(
@@ -81,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   color: Theme.of(context).colorScheme.primary,
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 10),
 
                 // welcome back, you've been missed!
                 Text(
@@ -91,8 +96,20 @@ class _RegisterPageState extends State<RegisterPage> {
                     fontSize: 16,
                   ),
                 ),
+                const SizedBox(height: 15),
+                MyTextField(
+                  controller: nameController,
+                  hintText: 'Name',
+                  obscureText: false,
+                ),
+                const SizedBox(height: 10),
+                MyTextField(
+                  controller: contactController,
+                  hintText: 'Contact Number',
+                  obscureText: false,
+                ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 10),
 
                 // email textfield
                 MyTextField(
@@ -119,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: true,
                 ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 15),
                 if (_errorMessage.isNotEmpty)
                 Text(
                 _errorMessage,
@@ -131,9 +148,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 MyButton(
                   onTap: register,
                   text: "Sign Up",
+
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 10),
 
                 // not a member? register now
                 Row(

@@ -24,7 +24,7 @@ class AppData {
       about: dummyText,
       isAvailable: true,
       off: 300,
-      quantity: 99,
+      quantity: 0,
       images: [
         'assets/images/HP1.png',
         'assets/images/HP.png',
@@ -40,7 +40,7 @@ class AppData {
       about: dummyText,
       isAvailable: false,
       off: 1000,
-      quantity: 10000,
+      quantity: 0,
       images: [
         'assets/images/ap.png',
         'assets/images/ap1.png',
@@ -51,123 +51,103 @@ class AppData {
       type: ProductType.Laptop,
     ),
     Product(
-      name: 'Samsung Galaxy Tab S8+',
+      name: 'Microsoft Surface Pro 4',
       price: 650,
       about: dummyText,
       isAvailable: true,
       off: null,
       quantity: 0,
       images: [
-        'assets/images/HP1.png',
-        'assets/images/HP.png',
-        'assets/images/HP2.png'
+        'assets/images/mic.png',
+        'assets/images/mic.png',
+        'assets/images/mic.png'
       ],
       isFavorite: false,
       rating: 3,
-      type: ProductType.tablet,
+      type: ProductType.Laptop,
     ),
     Product(
-      name: 'Samsung Galaxy Watch 4',
-      price: 229,
+      name: 'Samsung Book 3',
+      price: 100,
       about: dummyText,
       isAvailable: true,
-      off: 200,
+      off: null,
       quantity: 0,
       images: [
-        'assets/images/ap.png',
-        'assets/images/ap1.png',
-        'assets/images/ap2.png'
+        'assets/images/sam.png',
+        'assets/images/sam.png',
+        'assets/images/sam.png'
       ],
       isFavorite: false,
       rating: 5,
-      sizes: ProductSizeType(
-        categorical: [
-          Categorical(CategoricalType.small, true),
-          Categorical(CategoricalType.medium, false),
-          Categorical(CategoricalType.large, false),
-        ],
-      ),
-      type: ProductType.watch,
+
+      type: ProductType.Laptop,
     ),
     Product(
-      name: 'Apple Watch 7',
+      name: 'Acer Chromebook',
       price: 330,
       about: dummyText,
       isAvailable: true,
       off: null,
       quantity: 0,
       images: [
-        'assets/images/HP1.png',
-        'assets/images/HP.png',
-        'assets/images/HP2.png'
+        'assets/images/aser.png',
+        'assets/images/aser.png',
+        'assets/images/aser.png'
       ],
       isFavorite: false,
       rating: 4,
-      sizes: ProductSizeType(
-        numerical: [Numerical('41', true), Numerical('45', false)],
-      ),
-      type: ProductType.watch,
+
+      type: ProductType.Laptop,
     ),
     Product(
-        name: 'Beats studio 3',
+        name: 'Dell',
         price: 230,
         about: dummyText,
         isAvailable: true,
         off: null,
         quantity: 0,
         images: [
-          'assets/images/ap.png',
-          'assets/images/ap1.png',
-          'assets/images/ap2.png'
+          'assets/images/dell.png',
+          'assets/images/dell.png',
+          'assets/images/dell.png'
         ],
         isFavorite: false,
         rating: 2,
-        type: ProductType.headphone),
+        type: ProductType.Laptop),
     Product(
-      name: 'Samsung Q60 A',
+      name: 'Samsung Book1',
       price: 497,
       about: dummyText,
       isAvailable: true,
       off: null,
       quantity: 0,
       images: [
-        'assets/images/HP1.png',
-        'assets/images/HP.png',
-        'assets/images/HP2.png'
+        'assets/images/sam1.png',
+        'assets/images/sam1.png',
+        'assets/images/sam1.png'
       ],
       isFavorite: false,
       rating: 3,
-      sizes: ProductSizeType(
-        numerical: [
-          Numerical('43', true),
-          Numerical('50', false),
-          Numerical('55', false)
-        ],
-      ),
-      type: ProductType.tv,
+
+      type: ProductType.Laptop,
     ),
     Product(
-      name: 'Sony x 80 J',
+      name: 'Toshiba',
       price: 498,
       about: dummyText,
       isAvailable: true,
       off: null,
       quantity: 0,
       images: [
-        'assets/images/ap.png',
-        'assets/images/ap1.png',
-        'assets/images/ap2.png'
+        'assets/images/tos.png',
+        'assets/images/tos.png',
+        'assets/images/tos.png'
       ],
       isFavorite: false,
-      sizes: ProductSizeType(
-        numerical: [
-          Numerical('50', true),
-          Numerical('65', false),
-          Numerical('85', false)
-        ],
-      ),
+
       rating: 2,
-      type: ProductType.tv,
+      type: ProductType.Laptop,
     ),
   ];
 

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
+import '../src/view/screen/home_screen.dart';
 import './component/my_button.dart';
 import './component/my_textfield.dart';
-import './component/my_square_tile.dart';
-import '../theme/theme_provider.dart';
 import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -31,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
       // Navigate to home page if login successful
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
     } catch (e) {
       print('Login failed: $e');
@@ -42,19 +40,63 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.red,
         ),
       );
-    }
+    };
   }
 
-  void forgotPw() {
-    showDialog(
+  Future<void> _showForgotPasswordDialog(BuildContext context) async {
+    String email = '';
+
+    await showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Theme.of(context).colorScheme.background,
-        title: const Text("Not In Requirement"),
+        title: Text("Forgot Password"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              onChanged: (value) {
+                email = value;
+              },
+              decoration: InputDecoration(
+                labelText: 'Email',
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              try {
+                await _auth.sendPasswordResetEmail(email: email);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Password reset email sent to $email'),
+                  ),
+                );
+              } catch (error) {
+                print('Failed to send password reset email: $error');
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Failed to send password reset email'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+              Navigator.pop(context);
+            },
+            child: Text('Send Reset Email'),
+          ),
+        ],
       ),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: forgotPw,
+                        onTap: () => _showForgotPasswordDialog(context),
                         child: Text(
                           'Forgot Password?',
                           style: TextStyle(

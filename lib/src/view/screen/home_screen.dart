@@ -8,6 +8,9 @@ import 'package:laptopharbor/src/view/screen/profile_screen.dart';
 import 'package:laptopharbor/src/view/screen/favorite_screen.dart';
 import 'package:laptopharbor/src/view/screen/product_list_screen.dart';
 
+import '../../../Auth/component/my_app_bar.dart';
+import '../../../Auth/component/my_drawer.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -29,6 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return PageWrapper(
       child: Scaffold(
+        appBar: const MyAppBar(
+          title: "H O M E",
+          actions: [
+
+          ],
+        ),
+
+        drawer: const MyDrawer(),
+
         bottomNavigationBar: BottomNavyBar(
           itemCornerRadius: 10,
           selectedIndex: newIndex,

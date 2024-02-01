@@ -27,19 +27,20 @@ class MyDrawer extends StatelessWidget {
                         height: 60,
                       ),
                     ),
+
                   ),
                 ),
               ),
 
-              // home list tile
-              Padding(
-                padding: const EdgeInsets.only(left: 25.0, top: 10),
-                child: ListTile(
-                  title: const Text("H O M E"),
-                  leading: const Icon(Icons.home),
-                  onTap: () => Navigator.pop(context),
-                ),
-              ),
+              // // home list tile
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 25.0, top: 10),
+              //   child: ListTile(
+              //     title: const Text("H O M E"),
+              //     leading: const Icon(Icons.home),
+              //     onTap: () => Navigator.pop(context),
+              //   ),
+              // ),
 
               // settings list tile
               Padding(
