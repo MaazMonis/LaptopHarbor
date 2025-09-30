@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final DatabaseReference _userRef =  FirebaseDatabase.instance.reference().child('users');
+  final DatabaseReference _userRef = FirebaseDatabase.instance.ref().child('users');
   String _errorMessage = '';// Firebase Auth instance
 
   Future<void> register() async {
