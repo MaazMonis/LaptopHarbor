@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "363873475093",
-    "project_id": "laptopharbor-bb4c1",
-    "storage_bucket": "laptopharbor-bb4c1.appspot.com"
+    "project_number": "413477812077",
+    "project_id": "laptopharbor-c72b6",
+    "storage_bucket": "laptopharbor-c72b6.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:363873475093:android:294e317a2e8c103c074c1c",
+        "mobilesdk_app_id": "1:413477812077:android:910bc4b38d61031ad0cc64",
         "android_client_info": {
           "package_name": "com.example.laptopharbor"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB6yhbGJ0M441aZeDYei43SqYjIqTPeuec"
+          "current_key": "AIzaSyCCQvhvYIUVpr6cedQFrIuiiBVZxmWbh30"
         }
       ],
       "services": {
